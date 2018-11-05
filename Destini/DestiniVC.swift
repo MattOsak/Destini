@@ -43,9 +43,6 @@ class DestiniVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        // TODO Step 3: Set the text for the storyTextView, topButton, bottomButton, and to T1_Story, T1_Ans1, and T1_Ans2
-        
         storyTextView.text = story1
         topButton.setTitle(answer1a, for: .normal)
         bottomButton.setTitle(answer1b, for: .normal)
@@ -53,58 +50,68 @@ class DestiniVC: UIViewController {
         
     }
 
-    
-    // User presses one of the buttons
+
     @IBAction func buttonPressed(_ sender: UIButton) {
     
         
+        
         if storyTextView.text == story1 {
-        
-        
             if sender.tag == 1 {
-            
                 storyTextView.text = story3
                 topButton.setTitle(answer3a, for: .normal)
                 bottomButton.setTitle(answer3b, for: .normal)
             } else if sender.tag == 2 {
-                
                 storyTextView.text = story2
                 topButton.setTitle(answer2a, for: .normal)
                 bottomButton.setTitle(answer2b, for: .normal)
             }
-        }
-        
-        if storyTextView.text == story2 {
             
-            
+        } else if storyTextView.text == story2 {
             if sender.tag == 1 {
-                
                 storyTextView.text = story3
                 topButton.setTitle(answer3a, for: .normal)
                 bottomButton.setTitle(answer3b, for: .normal)
             } else if sender.tag == 2 {
-                
                 storyTextView.text = story4           }
-        }
-    
-        if storyTextView.text == story3 {
-            
-            
+        } else  if storyTextView.text == story3 {
             if sender.tag == 1 {
-                
                 storyTextView.text = story6
               
             } else if sender.tag == 2 {
-                
                 storyTextView.text = story5
                           }
         }
         
         
+       
+    if (storyTextView.text == story4 || storyTextView.text == story5 || storyTextView.text == story6) {
+        topButton.isHidden = true
+        bottomButton.isHidden = true
+    
+        let alert = UIAlertController(title: "Awesome", message: "You've finished with the story, do you want to start over", preferredStyle: .alert)
+        let restartAction = UIAlertAction(title: "Restart", style: .default, handler: {
+            (UIAlertAction) in
+            self.startOver()
+            
+        })
+        
+        alert.addAction(restartAction)
+        present(alert, animated: true, completion: nil)
+        
+        
     }
     
-
-
+    
+  }
+    
+    func startOver() {
+        
+        topButton.isHidden = false
+        bottomButton.isHidden = false
+        storyTextView.text = story1
+        topButton.setTitle(answer1a, for: .normal)
+        bottomButton.setTitle(answer1b, for: .normal)
+    }
 
 }
 
